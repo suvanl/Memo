@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Memo">
+
+    <!-- Background & foreground colours -->
+    <Color x:Key="BackgroundLight">#efefef</Color>
+    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}" />
+
+    <Color x:Key="BackgroundVeryLight">#fafafa</Color>
+    <SolidColorBrush x:Key="BackgroundVeryLightBrush" Color="{StaticResource BackgroundVeryLight}" />
+
+    <Color x:Key="ForegroundMain">#686868</Color>
+    <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}" />
+
+    <Color x:Key="ForegroundVeryDark">#2c2f33</Color>
+    <SolidColorBrush x:Key="ForegroundVeryDarkBrush" Color="{StaticResource ForegroundVeryDark}" />
+
+    <Color x:Key="ForegroundLight">#ffffff</Color>
+    <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
+
+    <Color x:Key="ForegroundDark">#bdbdbd</Color>
+    <SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDark}" />
+    
+    <!-- Logo & global colours -->
+    <Color x:Key="MemoBlue">#3099c5</Color>
+    <SolidColorBrush x:Key="MemoBlueBrush" Color="{StaticResource MemoBlue}" />
+
+    <Color x:Key="MemoTransparentBlue">#003099c5</Color>
+    <SolidColorBrush x:Key="MemoTransparentBlueBrush" Color="{StaticResource MemoTransparentBlue}" />
+
+    <Color x:Key="MemoLightBlue">#45b6e5</Color>
+    <SolidColorBrush x:Key="MemoLightBlueBrush" Color="{StaticResource MemoLightBlue}" />
+
+    <Color x:Key="MemoVeryLightBlue">#c3e5f3</Color>
+    <SolidColorBrush x:Key="MemoVeryLightBlueBrush" Color="{StaticResource MemoVeryLightBlue}" />
+
+    <Color x:Key="MemoVeryVeryLightBlue">#ecf6fb</Color>
+    <SolidColorBrush x:Key="MemoVeryVeryLightBlueBrush" Color="{StaticResource MemoVeryVeryLightBlue}" />
+
+    <Color x:Key="MemoDarkBlue">#0c6991</Color>
+    <SolidColorBrush x:Key="MemoDarkBlueBrush" Color="{StaticResource MemoDarkBlue}" />
+
+    <Color x:Key="MemoOrange">#ffa800</Color>
+    <SolidColorBrush x:Key="MemoOrangeBrush" Color="{StaticResource MemoOrange}" />
+
+    <Color x:Key="MemoRed">#ff4747</Color>
+    <SolidColorBrush x:Key="MemoRedBrush" Color="{StaticResource MemoRed}" />
+
+    <Color x:Key="MemoGreen">#00c541</Color>
+    <SolidColorBrush x:Key="MemoGreenBrush" Color="{StaticResource MemoGreen}" />
+
+</ResourceDictionary>
