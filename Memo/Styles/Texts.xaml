@@ -9,7 +9,7 @@
         <Setter Property="Margin" Value="0 6" />
     </Style>
 
-    <!-- TextBox (Email) -->
+    <!-- TextBox -->
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
         
         <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
