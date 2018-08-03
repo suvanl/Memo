@@ -79,11 +79,11 @@
 
             <!-- Message box -->
             <TextBox Grid.Column="1" 
-                     Grid.ColumnSpan="2"
+                     Grid.ColumnSpan="1"
                      FontSize="{StaticResource FontSizeRegular}"
                      VerticalAlignment="Center"
                      BorderThickness="0"
-                     Padding="0 0 50 0"
+                     Padding="0 10 10 10"
                      AcceptsTab="True"
                      AcceptsReturn="True"
                      VerticalScrollBarVisibility="Auto"
@@ -105,7 +105,6 @@
                 
                 <!-- Send button -->
                 <Button Content="Send"
-                        Visibility="Collapsed"
                         Padding="8"
                         Background="{StaticResource MemoGreenBrush}"
                         FontSize="{StaticResource FontSizeRegular}"

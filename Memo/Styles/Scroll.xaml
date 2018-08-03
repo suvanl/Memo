@@ -84,10 +84,10 @@
                                     IsEnabled="{TemplateBinding IsMouseOver}"
                                     Height="6">
                                     <Track.DecreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" />
+                                        <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageLeftCommand}" />
                                     </Track.DecreaseRepeatButton>
                                     <Track.IncreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" />
+                                        <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageRightCommand}" />
                                     </Track.IncreaseRepeatButton>
                                     <Track.Thumb>
                                         <Thumb Style="{StaticResource ScrollBarThumb}" />

@@ -56,7 +56,7 @@
                                 </Border>
 
                                 <!-- Main content -->
-                                <Border Padding="0 0 8 0" Grid.Column="1">
+                                <Border Padding="0 0 12 0" Grid.Column="1">
                                     <StackPanel VerticalAlignment="Center">
                                         <!-- Name -->
                                         <TextBlock Text="{Binding Name}"
