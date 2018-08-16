@@ -9,27 +9,7 @@ namespace Memo
     /// </summary>
     public static class StoryboardHelpers
     {
-        /// <summary>
-        /// Adds a slide from right animation to the storyboard
-        /// </summary>
-        /// <param name="storyboard">The storyboard to add the animation to</param>
-        /// <param name="seconds">The time the animation will take to complete</param>
-        /// <param name="offset">The distance to the right to start from</param>
-        /// <param name="decelerationRatio">The rate of deceleration</param>
-        /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
-        public static void AddSlideFromRight(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
-        {
-            var animation = new ThicknessAnimation
-            {
-                Duration = new Duration(TimeSpan.FromSeconds(seconds)),
-                From = new Thickness(keepMargin ? offset : 0, 0, -offset, 0),
-                To = new Thickness(0),
-                DecelerationRatio = decelerationRatio
-            };
-
-            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
-            storyboard.Children.Add(animation);
-        }
+        #region Sliding to/from left
 
         /// <summary>
         /// Adds a slide from right animation to the storyboard
@@ -75,6 +55,32 @@ namespace Memo
             storyboard.Children.Add(animation);
         }
 
+        #endregion
+
+        #region Sliding to/from right
+
+        /// <summary>
+        /// Adds a slide from right animation to the storyboard
+        /// </summary>
+        /// <param name="storyboard">The storyboard to add the animation to</param>
+        /// <param name="seconds">The time the animation will take to complete</param>
+        /// <param name="offset">The distance to the right to start from</param>
+        /// <param name="decelerationRatio">The rate of deceleration</param>
+        /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
+        public static void AddSlideFromRight(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
+        {
+            var animation = new ThicknessAnimation
+            {
+                Duration = new Duration(TimeSpan.FromSeconds(seconds)),
+                From = new Thickness(keepMargin ? offset : 0, 0, -offset, 0),
+                To = new Thickness(0),
+                DecelerationRatio = decelerationRatio
+            };
+
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+            storyboard.Children.Add(animation);
+        }
+
         /// <summary>
         /// Adds a slide to right animation to the storyboard
         /// </summary>
@@ -96,6 +102,10 @@ namespace Memo
             Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
             storyboard.Children.Add(animation);
         }
+
+        #endregion
+
+        #region Fade in/out
 
         /// <summary>
         /// Adds a fade in animation to the storyboard
@@ -132,5 +142,7 @@ namespace Memo
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
             storyboard.Children.Add(animation);
         }
+
+        #endregion
     }
 }
