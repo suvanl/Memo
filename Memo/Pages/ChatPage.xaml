@@ -1,4 +1,4 @@
-﻿<local:BasePage x:TypeArguments="core:LoginViewModel" x:Class="Memo.ChatPage"
+﻿<local:BasePage x:TypeArguments="core:ChatMessageListViewModel" x:Class="Memo.ChatPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -50,6 +50,13 @@
         
         <!-- Chat list -->
         <local:ChatMessageListControl Grid.Row="1" />
+        
+        <!-- Attachment menu popup -->
+        <local:BubbleContent
+            Grid.Row="1"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            />
 
         <!-- Message text entry field -->
         <Grid Grid.Row="2"
@@ -74,6 +81,7 @@
                     Height="{Binding MinHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                     Content="{StaticResource FontAwesomePaperclipIcon}"
                     VerticalAlignment="Top"
+                    Command="{Binding AttachmentButtonCommand}"
                     Foreground="{StaticResource ForegroundDarkBrush}"
                     />
 
