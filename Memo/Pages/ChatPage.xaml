@@ -54,8 +54,10 @@
         <!-- Attachment menu popup -->
         <local:BubbleContent
             Grid.Row="1"
+            DataContext="{Binding AttachmentMenu}"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
+            local:AnimateSlideInFromBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ChatPage}}}"
             />
 
         <!-- Message text entry field -->

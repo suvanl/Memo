@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Memo"
+             xmlns:core="clr-namespace:Memo.Core;assembly=Memo.Core"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DataContext="{x:Static core:ChatAttachmentPopupMenuDesignModel.Instance}"
+             d:DesignHeight="100" d:DesignWidth="300"
+             Height="100"
+             Width="250">
     
     <!-- Chat message container -->
     <Grid>
@@ -19,7 +23,7 @@
         <Border CornerRadius="10"
                 Padding="15"
                 Margin="5 0 0 0"
-                Background="{StaticResource ForegroundLightBrush}">
+                Background="{Binding BubbleBackground, Converter={local:StringRGBToBrushConverter}}">
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="4" ShadowDepth="2" Color="{StaticResource MemoLightBlue}" />
@@ -41,8 +45,8 @@
                       Margin="15 -1 15 0"
                       Data="M 0,0 L 10,10 L 20,0 L 0,0"
                       StrokeThickness="0"
-                      HorizontalAlignment="Left"
-                      Fill="{StaticResource ForegroundLightBrush}">
+                      HorizontalAlignment="{Binding ArrowAlignment, Converter={local:HorizontalAlignmentConverter}}"
+                      Fill="{Binding BubbleBackground, Converter={local:StringRGBToBrushConverter}}">
 
             <Path.Effect>
                 <DropShadowEffect BlurRadius="3" ShadowDepth="3" Color="{StaticResource MemoLightBlue}" />

@@ -105,6 +105,54 @@ namespace Memo
 
         #endregion
 
+        #region Sliding to/from Bottom
+
+        /// <summary>
+        /// Adds a slide from bottom animation to the storyboard
+        /// </summary>
+        /// <param name="storyboard">The storyboard to add the animation to</param>
+        /// <param name="seconds">The time the animation will take to complete</param>
+        /// <param name="offset">The distance to the bottom to start from</param>
+        /// <param name="decelerationRatio">The rate of deceleration</param>
+        /// <param name="keepMargin">Whether to keep the element at the same height or not, during animation</param>
+        public static void AddSlideFromBottom(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
+        {
+            var animation = new ThicknessAnimation
+            {
+                Duration = new Duration(TimeSpan.FromSeconds(seconds)),
+                From = new Thickness(0, keepMargin ? offset : 0, 0, -offset),
+                To = new Thickness(0),
+                DecelerationRatio = decelerationRatio
+            };
+
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+            storyboard.Children.Add(animation);
+        }
+
+        /// <summary>
+        /// Adds a slide to bottom animation to the storyboard
+        /// </summary>
+        /// <param name="storyboard">The storyboard to add the animation to</param>
+        /// <param name="seconds">The time the animation will take to complete</param>
+        /// <param name="offset">The distance to the bottom to start from</param>
+        /// <param name="decelerationRatio">The rate of deceleration</param>
+        /// <param name="keepMargin">Whether to keep the element at the same height or not, during animation</param>
+        public static void AddSlideToBottom(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
+        {
+            var animation = new ThicknessAnimation
+            {
+                Duration = new Duration(TimeSpan.FromSeconds(seconds)),
+                From = new Thickness(0),
+                To = new Thickness(0, keepMargin ? offset : 0, 0, -offset),
+                DecelerationRatio = decelerationRatio
+            };
+
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+            storyboard.Children.Add(animation);
+        }
+
+        #endregion
+
         #region Fade in/out
 
         /// <summary>
