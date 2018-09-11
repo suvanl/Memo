@@ -5,7 +5,7 @@ namespace Memo
     /// <summary>
     /// A view model for any popup menus
     /// </summary>
-    public class BasePopupMenuViewModel : BaseViewModel
+    public class BasePopupViewModel : BaseViewModel
     {
         #region Public Properties
 
@@ -19,6 +19,11 @@ namespace Memo
         /// </summary>
         public ElementHorizontalAlignment ArrowAlignment { get; set; }
 
+        /// <summary>
+        /// The content inside of the popup menu
+        /// </summary>
+        public BaseViewModel Content { get; set; }
+
         #endregion
 
         #region Constructor
@@ -26,7 +31,7 @@ namespace Memo
         /// <summary>
         /// Default constructor
         /// </summary>
-        public BasePopupMenuViewModel()
+        public BasePopupViewModel()
         {
             // TODO: move "Colors.xaml" style into Memo.Core and make use of it here
             BubbleBackground = "ffffff";

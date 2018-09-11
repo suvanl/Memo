@@ -21,6 +21,11 @@ namespace Memo.Core
         public bool AttachmentMenuVisible { get; set; }
 
         /// <summary>
+        /// True if any popup menus are visible
+        /// </summary>
+        public bool AnyPopupVisible => AttachmentMenuVisible;
+
+        /// <summary>
         /// The view model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
@@ -34,6 +39,11 @@ namespace Memo.Core
         /// </summary>
         public ICommand AttachmentButtonCommand { get; set; }
 
+        /// <summary>
+        /// The command for when the the area outside of any popup is clicked
+        /// </summary>
+        public ICommand PopupClickAwayCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -43,7 +53,11 @@ namespace Memo.Core
         /// </summary>
         public ChatMessageListViewModel()
         {
+            // Commands
             AttachmentButtonCommand = new RelayCommand(AttachmentButton);
+            PopupClickAwayCommand = new RelayCommand(PopupClickAway);
+
+            // Default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
         }
 
@@ -57,6 +71,14 @@ namespace Memo.Core
         public void AttachmentButton()
         {
             AttachmentMenuVisible ^= true;
+        }
+
+        /// <summary>
+        /// Hides any open popup menus when the PopupClickAway area is clicked
+        /// </summary>
+        public void PopupClickAway()
+        {
+            AttachmentMenuVisible = false;
         }
 
         #endregion
