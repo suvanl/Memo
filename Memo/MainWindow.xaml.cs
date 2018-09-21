@@ -28,5 +28,17 @@ namespace Memo
 
             DataContext = new WindowViewModel(this);
         }
+
+        private void AppWindow_Deactivated(object sender, EventArgs e)
+        {
+            // Show overlay if MainWindow is not in focus
+            (DataContext as WindowViewModel).DimmableOverlayVisible = true;
+        }
+
+        private void AppWindow_Activated(object sender, EventArgs e)
+        {
+            // Hide overlay if MainWindow is focused
+            (DataContext as WindowViewModel).DimmableOverlayVisible = false;
+        }
     }
 }

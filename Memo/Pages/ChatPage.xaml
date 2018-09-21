@@ -130,6 +130,7 @@
                 <!-- Send button -->
                 <Button Content="Send"
                         Padding="8"
+                        Command="{Binding SendCommand}"
                         Background="{StaticResource MemoGreenBrush}"
                         FontSize="{StaticResource FontSizeRegular}"
                         />

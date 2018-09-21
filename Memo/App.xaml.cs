@@ -22,10 +22,22 @@ namespace Memo
         {
             base.OnStartup(e);
 
-            IoC.Setup();
+            ApplicationSetup();
 
             Current.MainWindow = new MainWindow();
             Current.MainWindow.Show();
+        }
+
+        /// <summary>
+        /// Configures the application to be ready for use
+        /// </summary>
+        private void ApplicationSetup()
+        {
+            // Setup IoC
+            IoC.Setup();
+
+            // Bind UI manager
+            IoC.Kernel.Bind<IUIManager>().ToConstant(new UIManager());
         }
     }
 }

@@ -44,6 +44,11 @@ namespace Memo.Core
         /// </summary>
         public ICommand PopupClickAwayCommand { get; set; }
 
+        /// <summary>
+        /// The command for when the user clicks the send button
+        /// </summary>
+        public ICommand SendCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -56,6 +61,7 @@ namespace Memo.Core
             // Commands
             AttachmentButtonCommand = new RelayCommand(AttachmentButton);
             PopupClickAwayCommand = new RelayCommand(PopupClickAway);
+            SendCommand = new RelayCommand(Send);
 
             // Default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
@@ -79,6 +85,19 @@ namespace Memo.Core
         public void PopupClickAway()
         {
             AttachmentMenuVisible = false;
+        }
+
+        /// <summary>
+        /// Triggered when the send button is clicked
+        /// </summary>
+        public void Send()
+        {
+            IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+            {
+                Title = "Send Message",
+                Message = "Thank you for writing a nice message!",
+                OkText = "OK"
+            });
         }
 
         #endregion

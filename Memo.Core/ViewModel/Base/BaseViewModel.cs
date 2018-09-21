@@ -9,7 +9,6 @@ namespace Memo.Core
     /// <summary>
     /// A base view model that fires Property Changed events as required
     /// </summary>
-    [AddINotifyPropertyChangedInterface]
     public class BaseViewModel : INotifyPropertyChanged
     {
         /// <summary>
