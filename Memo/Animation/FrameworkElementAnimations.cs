@@ -50,7 +50,7 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            element.Visibility = Visibility.Hidden;
 
             await Task.Delay((int)(seconds * 1000));
         }
@@ -103,6 +103,8 @@ namespace Memo
             element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
+
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion
@@ -153,6 +155,8 @@ namespace Memo
             element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
+
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion

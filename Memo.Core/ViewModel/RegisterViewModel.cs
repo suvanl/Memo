@@ -63,7 +63,7 @@ namespace Memo.Core
         public async Task LoginAsync()
         {
             // Navigates to RegisterPage
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Login);
+            IoC.Application.GoToPage(ApplicationPage.Login);
 
             await Task.Delay(1);
         }

@@ -20,6 +20,16 @@ namespace Memo.Core
         /// </summary>
         public static IUIManager UI => IoC.Get<IUIManager>();
 
+        /// <summary>
+        /// A shortcut to access the <see cref="ApplicationViewModel"/>
+        /// </summary>
+        public static ApplicationViewModel Application => IoC.Get<ApplicationViewModel>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="SettingsViewModel"/>
+        /// </summary>
+        public static SettingsViewModel Settings => IoC.Get<SettingsViewModel>();
+
         #endregion
 
         #region Construction
@@ -41,6 +51,9 @@ namespace Memo.Core
         {
             // Binds to a single instance of ApplicationViewModel
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel());
+
+            // Binds to a single instance of SettingsViewModel
+            Kernel.Bind<SettingsViewModel>().ToConstant(new SettingsViewModel());
         }
 
         #endregion
