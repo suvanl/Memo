@@ -10,10 +10,10 @@ namespace Memo
     /// </summary>
     public static class FrameworkElementAnimations
     {
-        #region Left
+        #region Slide In/Out
 
         /// <summary>
-        /// Slides an element in from the left
+        /// Slides an element in
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="direction">The direction of the slide animation</param>
@@ -26,141 +26,66 @@ namespace Memo
         {
             var sb = new Storyboard();
 
-            //switch ()
+            switch (direction)
+            {
+                case AnimationSlideInDirection.Left:
+                    sb.AddSlideFromLeft(seconds, size == 0 ? element.ActualWidth : size, keepMargin: keepMargin);
+                    break;
 
-            sb.AddSlideFromLeft(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
+                case AnimationSlideInDirection.Right:
+                    sb.AddSlideFromRight(seconds, size == 0 ? element.ActualWidth : size, keepMargin: keepMargin);
+                    break;
 
-            sb.AddFadeIn(seconds);
+                case AnimationSlideInDirection.Top:
+                    sb.AddSlideFromTop(seconds, size == 0 ? element.ActualHeight : size, keepMargin: keepMargin);
+                    break;
 
-            sb.Begin(element);
-
-            if (seconds != 0)
-                element.Visibility = Visibility.Visible;
-
-            await Task.Delay((int)(seconds * 1000));
-        }
-
-        /// <summary>
-        /// Slides an element out to the left
-        /// </summary>
-        /// <param name="element">The element to animate</param>
-        /// <param name="seconds">Duration of the animation</param>
-        /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
-        /// <param name="width">The animation width to animate to. If unspecified, the element's width is used</param>
-        /// <returns></returns>
-        public static async Task SlideAndFadeOutAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
-        {
-            var sb = new Storyboard();
-
-            sb.AddSlideToLeft(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
-
-            sb.AddFadeOut(seconds);
-
-            sb.Begin(element);
-
-            if (seconds != 0)
-                element.Visibility = Visibility.Visible;
-
-            await Task.Delay((int)(seconds * 1000));
-
-            element.Visibility = Visibility.Hidden;
-        }
-
-        #endregion
-
-        #region Right
-
-        /// <summary>
-        /// Slides an element in from the right
-        /// </summary>
-        /// <param name="element">The element to animate</param>
-        /// <param name="seconds">Duration of the animation</param>
-        /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
-        /// <param name="width">The animation width to animate to. If unspecified, the element's width is used</param>
-        /// <returns></returns>
-        public static async Task SlideAndFadeInFromRightAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
-        {
-            var sb = new Storyboard();
-
-            sb.AddSlideFromRight(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
+                case AnimationSlideInDirection.Bottom:
+                    sb.AddSlideFromBottom(seconds, size == 0 ? element.ActualHeight : size, keepMargin: keepMargin);
+                    break;
+            }
 
             sb.AddFadeIn(seconds);
 
             sb.Begin(element);
 
-            if (seconds != 0)
+            if (seconds != 0 || firstLoad)
                 element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
 
         /// <summary>
-        /// Slides an element out to the right
+        /// Slides an element out
         /// </summary>
         /// <param name="element">The element to animate</param>
+        /// <param name="direction">The direction of the slide animation</param>
         /// <param name="seconds">Duration of the animation</param>
         /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
-        /// <param name="width">The animation width to animate to. If unspecified, the element's width is used</param>
+        /// <param name="size">The animation width/height to animate to. If unspecified, the element's size is used</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToRightAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
+        public static async Task SlideAndFadeOutAsync(this FrameworkElement element, AnimationSlideInDirection direction, float seconds = 0.3f, bool keepMargin = true, int size = 0)
         {
             var sb = new Storyboard();
 
-            sb.AddSlideToRight(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
+            switch (direction)
+            {
+                case AnimationSlideInDirection.Left:
+                    sb.AddSlideToLeft(seconds, size == 0 ? element.ActualWidth : size, keepMargin: keepMargin);
+                    break;
 
-            sb.AddFadeOut(seconds);
+                case AnimationSlideInDirection.Right:
+                    sb.AddSlideToRight(seconds, size == 0 ? element.ActualWidth : size, keepMargin: keepMargin);
+                    break;
 
-            sb.Begin(element);
+                case AnimationSlideInDirection.Top:
+                    sb.AddSlideToTop(seconds, size == 0 ? element.ActualHeight : size, keepMargin: keepMargin);
+                    break;
 
-            if (seconds != 0)
-                element.Visibility = Visibility.Visible;
-
-            await Task.Delay((int)(seconds * 1000));
-
-            element.Visibility = Visibility.Hidden;
-        }
-
-        #endregion
-
-        #region Bottom
-
-        /// <summary>
-        /// Slides an element in from the bottom
-        /// </summary>
-        /// <param name="element">The element to animate</param>
-        /// <param name="seconds">Duration of the animation</param>
-        /// <param name="keepMargin">Whether to keep the element at the same height or not, during animation</param>
-        /// <param name="height">The animation height to animate to. If unspecified, the element's height is used</param>
-        /// <returns></returns>
-        public static async Task SlideAndFadeInFromBottomAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int height = 0)
-        {
-            var sb = new Storyboard();
-
-            sb.AddSlideFromBottom(seconds, height == 0 ? element.ActualHeight : height, keepMargin: keepMargin);
-
-            sb.AddFadeIn(seconds);
-
-            sb.Begin(element);
-
-            if (seconds != 0)
-                element.Visibility = Visibility.Visible;
-
-            await Task.Delay((int)(seconds * 1000));
-        }
-
-        /// <summary>
-        /// Slides an element out to the bottom
-        /// </summary>
-        /// <param name="element">The element to animate</param>
-        /// <param name="seconds">Duration of the animation</param>
-        /// <param name="keepMargin">Whether to keep the element at the same height or not, during animation</param>
-        /// <param name="height">The animation height to animate to. If unspecified, the element's height is used</param>
-        /// <returns></returns>
-        public static async Task SlideAndFadeOutToBottomAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int height = 0)
-        {
-            var sb = new Storyboard();
-
-            sb.AddSlideToBottom(seconds, height == 0 ? element.ActualHeight : height, keepMargin: keepMargin);
+                case AnimationSlideInDirection.Bottom:
+                    sb.AddSlideToBottom(seconds, size == 0 ? element.ActualHeight : size, keepMargin: keepMargin);
+                    break;
+            }
 
             sb.AddFadeOut(seconds);
 
@@ -183,8 +108,9 @@ namespace Memo
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="seconds">Duration of the animation</param>
+        /// <param name="firstLoad">Indicates if this is the first load</param>
         /// <returns></returns>
-        public static async Task FadeInAsync(this FrameworkElement element, float seconds = 0.3f)
+        public static async Task FadeInAsync(this FrameworkElement element, bool firstLoad, float seconds = 0.3f)
         {
             var sb = new Storyboard();
 
@@ -192,17 +118,18 @@ namespace Memo
 
             sb.Begin(element);
 
-            if (seconds != 0)
+            if (seconds != 0 || firstLoad)
                 element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
 
         /// <summary>
-        /// Fades an element out
+        /// Slides an element out to the right
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="seconds">Duration of the animation</param>
+        /// <param name="firstLoad">Indicates if this is the first load</param>
         /// <returns></returns>
         public static async Task FadeOutAsync(this FrameworkElement element, float seconds = 0.3f)
         {

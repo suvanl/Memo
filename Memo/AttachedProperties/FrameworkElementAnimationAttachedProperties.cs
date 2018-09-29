@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Memo
@@ -12,13 +13,16 @@ namespace Memo
     {
         #region Protected Properties
 
-        protected bool mFirstFire = true;
+        /// <summary>
+        /// True if this is the very first time the value has been updated.
+        /// This is used to ensure the logic is run at least once during first load
+        /// </summary>
+        protected Dictionary<DependencyObject, bool> mAlreadyLoaded = new Dictionary<DependencyObject, bool>();
 
-        #endregion
-
-        #region Public Properties
-
-        public bool FirstLoad { get; set; } = true;
+        /// <summary>
+        /// The most recent value used, if a value was changed before first load
+        /// </summary>
+        protected Dictionary<DependencyObject, bool> mFirstLoadValue = new Dictionary<DependencyObject, bool>();
 
         #endregion
 
@@ -27,13 +31,14 @@ namespace Memo
             if (!(sender is FrameworkElement element))
                 return;
 
-            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire)
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mAlreadyLoaded.ContainsKey(sender))
                 return;
 
-            mFirstFire = false;
-
-            if (FirstLoad)
+            if (!mAlreadyLoaded.ContainsKey(sender))
             {
+                // Flags that the application is in the (unfinished) first load stage
+                mAlreadyLoaded[sender] = false;
+
                 // Starts off hidden before determining how to animate
                 // if the initial animation is animating out
                 if (!(bool)value)
@@ -51,27 +56,28 @@ namespace Memo
                     await Task.Delay(5);
 
                     // Runs desired animation
-                    DoAnimation(element, (bool)value);
+                    DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
 
                     // No longer in FirstLoad stage
-                    FirstLoad = false;
+                    mAlreadyLoaded[sender] = true;
                 };
 
                 // Hooks into the "Loaded" event of the element
                 element.Loaded += onLoaded;
             }
+            else if (mAlreadyLoaded[sender] == false)
+            {
+                // Updates the property
+                mFirstLoadValue[sender] = (bool)value;
+            }
             else
             {
                 // Does the desired animation
-                DoAnimation(element, (bool)value);
+                DoAnimation(element, (bool)value, false);
             }
         }
 
-        protected virtual void DoAnimation(FrameworkElement element, bool value)
-        {
-
-        }
-
+        protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad) { }
     }
 
     /// <summary>
@@ -79,14 +85,14 @@ namespace Memo
     /// </summary>
     public class AnimateSlideInFromLeftProperty : AnimateBaseProperty<AnimateSlideInFromLeftProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 // Animate in
-                await element.SlideAndFadeInFromLeftAsync(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Left, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
                 // Animate out
-                await element.SlideAndFadeOutToLeftAsync(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, firstLoad ? 0 : 0.3f, keepMargin: false);
         }
     }
 
@@ -95,14 +101,14 @@ namespace Memo
     /// </summary>
     public class AnimateSlideInFromBottomProperty : AnimateBaseProperty<AnimateSlideInFromBottomProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 // Animate in
-                await element.SlideAndFadeInFromBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: false);
             else
                 // Animate out
-                await element.SlideAndFadeOutToBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: false);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: false);
         }
     }
 
@@ -112,14 +118,14 @@ namespace Memo
     /// </summary>
     public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 // Animate in
-                await element.SlideAndFadeInFromBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, firstLoad, firstLoad ? 0 : 0.3f, keepMargin: true);
             else
                 // Animate out
-                await element.SlideAndFadeOutToBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: true);
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: true);
         }
     }
 
@@ -128,14 +134,14 @@ namespace Memo
     /// </summary>
     public class AnimateFadeInProperty : AnimateBaseProperty<AnimateFadeInProperty>
     {
-        protected override async void DoAnimation(FrameworkElement element, bool value)
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
         {
             if (value)
                 // Animate in
-                await element.FadeInAsync(FirstLoad ? 0 : 0.3f);
+                await element.FadeInAsync(firstLoad, firstLoad ? 0 : 0.3f);
             else
                 // Animate out
-                await element.FadeOutAsync(FirstLoad ? 0 : 0.3f);
+                await element.FadeOutAsync(firstLoad ? 0 : 0.3f);
         }
     }
 }
