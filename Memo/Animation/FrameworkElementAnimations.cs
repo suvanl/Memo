@@ -5,6 +5,9 @@ using System.Windows.Media.Animation;
 
 namespace Memo
 {
+    /// <summary>
+    /// Helpers to animate framework elements in specific ways
+    /// </summary>
     public static class FrameworkElementAnimations
     {
         #region Left
@@ -13,13 +16,17 @@ namespace Memo
         /// Slides an element in from the left
         /// </summary>
         /// <param name="element">The element to animate</param>
+        /// <param name="direction">The direction of the slide animation</param>
         /// <param name="seconds">Duration of the animation</param>
         /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
-        /// <param name="width">The animation width to animate to. If unspecified, the element's width is used</param>
+        /// <param name="size">The animation width/height to animate to. If unspecified, the element's size is used</param>
+        /// <param name="firstLoad">Indicates if this is the first load</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeInFromLeftAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
+        public static async Task SlideAndFadeInAsync(this FrameworkElement element, AnimationSlideInDirection direction, bool firstLoad, float seconds = 0.3f, bool keepMargin = true, int size = 0)
         {
             var sb = new Storyboard();
+
+            //switch ()
 
             sb.AddSlideFromLeft(seconds, width == 0 ? element.ActualWidth : width, keepMargin: keepMargin);
 
@@ -27,7 +34,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
@@ -40,7 +48,7 @@ namespace Memo
         /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
         /// <param name="width">The animation width to animate to. If unspecified, the element's width is used</param>
         /// <returns></returns>
-        public static async Task SlideAndFadeOutToLeftAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
+        public static async Task SlideAndFadeOutAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int width = 0)
         {
             var sb = new Storyboard();
 
@@ -50,9 +58,12 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Hidden;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
+
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion
@@ -77,7 +88,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
@@ -100,7 +112,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
 
@@ -129,7 +142,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
@@ -152,7 +166,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
 
@@ -177,7 +192,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
         }
@@ -196,7 +212,8 @@ namespace Memo
 
             sb.Begin(element);
 
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             await Task.Delay((int)(seconds * 1000));
 

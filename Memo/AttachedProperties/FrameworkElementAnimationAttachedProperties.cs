@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 
 namespace Memo
 {
@@ -9,6 +10,12 @@ namespace Memo
     public abstract class AnimateBaseProperty<Parent> : BaseAttachedProperty<Parent, bool>
         where Parent : BaseAttachedProperty<Parent, bool>, new()
     {
+        #region Protected Properties
+
+        protected bool mFirstFire = true;
+
+        #endregion
+
         #region Public Properties
 
         public bool FirstLoad { get; set; } = true;
@@ -20,17 +27,28 @@ namespace Memo
             if (!(sender is FrameworkElement element))
                 return;
 
-            if (sender.GetValue(ValueProperty) == value && !FirstLoad)
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire)
                 return;
+
+            mFirstFire = false;
 
             if (FirstLoad)
             {
+                // Starts off hidden before determining how to animate
+                // if the initial animation is animating out
+                if (!(bool)value)
+                    element.Visibility = Visibility.Hidden;
+
                 // Creates a single self-unhookable event for the element's "Loaded" event
                 RoutedEventHandler onLoaded = null;
-                onLoaded = (ss, ee) =>
+                onLoaded = async (ss, ee) =>
                 {
                     // Unhook
                     element.Loaded -= onLoaded;
+
+                    // Slight delay after load is required for some elements to be correctly laid out
+                    // and for their widths/heights to be correctly calculated
+                    await Task.Delay(5);
 
                     // Runs desired animation
                     DoAnimation(element, (bool)value);
@@ -44,7 +62,7 @@ namespace Memo
             }
             else
             {
-                // Do desired animation
+                // Does the desired animation
                 DoAnimation(element, (bool)value);
             }
         }
