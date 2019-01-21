@@ -222,7 +222,7 @@ namespace Memo
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = 0,
-                To = 1,
+                To = 1
             };
 
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
@@ -240,7 +240,7 @@ namespace Memo
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = 1,
-                To = 0,
+                To = 0
             };
 
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
