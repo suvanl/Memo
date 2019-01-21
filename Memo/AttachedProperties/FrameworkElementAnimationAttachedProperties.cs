@@ -62,7 +62,7 @@ namespace Memo
                     // Runs desired animation
                     DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
 
-                    // Flag that the application is longer in the FirstLoad stage
+                    // Flag that the application is no longer in the FirstLoad stage
                     mAlreadyLoaded[sender] = true;
                 };
 
