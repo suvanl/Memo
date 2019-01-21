@@ -9,7 +9,7 @@ namespace Memo
     /// </summary>
     public static class StoryboardHelpers
     {
-        #region Sliding to/from left
+        #region Sliding To/From Left
 
         /// <summary>
         /// Adds a slide from right animation to the storyboard
@@ -57,7 +57,7 @@ namespace Memo
 
         #endregion
 
-        #region Sliding to/from right
+        #region Sliding To/From Right
 
         /// <summary>
         /// Adds a slide from right animation to the storyboard
@@ -91,6 +91,7 @@ namespace Memo
         /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
         public static void AddSlideToRight(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
+            // Create the margin animate from right 
             var animation = new ThicknessAnimation
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
@@ -99,13 +100,16 @@ namespace Memo
                 DecelerationRatio = decelerationRatio
             };
 
+            // Set the target property name
             Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
             storyboard.Children.Add(animation);
         }
 
         #endregion
 
-        #region Sliding to/from top
+        #region Sliding To/From Top
 
         /// <summary>
         /// Adds a slide from top animation to the storyboard
@@ -139,6 +143,7 @@ namespace Memo
         /// <param name="keepMargin">Whether to keep the element at the same width or not, during animation</param>
         public static void AddSlideToTop(this Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
         {
+            // Create the margin animate from right 
             var animation = new ThicknessAnimation
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
@@ -147,13 +152,16 @@ namespace Memo
                 DecelerationRatio = decelerationRatio
             };
 
+            // Set the target property name
             Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
             storyboard.Children.Add(animation);
         }
 
         #endregion
 
-        #region Sliding to/from Bottom
+        #region Sliding To/From Bottom
 
         /// <summary>
         /// Adds a slide from bottom animation to the storyboard
@@ -201,7 +209,7 @@ namespace Memo
 
         #endregion
 
-        #region Fade in/out
+        #region Fade In/Out
 
         /// <summary>
         /// Adds a fade in animation to the storyboard
@@ -214,7 +222,7 @@ namespace Memo
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = 0,
-                To = 1
+                To = 1,
             };
 
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
@@ -232,7 +240,7 @@ namespace Memo
             {
                 Duration = new Duration(TimeSpan.FromSeconds(seconds)),
                 From = 1,
-                To = 0
+                To = 0,
             };
 
             Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));

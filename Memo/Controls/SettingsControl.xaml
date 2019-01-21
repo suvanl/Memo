@@ -47,7 +47,7 @@
 
             <!-- Main Content-->
             <Grid Grid.Row="1"
-                  Width="700"
+                  Width="600"
                   VerticalAlignment="Top"
                   >
                 
@@ -57,9 +57,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Profile picture -->
-                <Grid Margin="0 0 10 0"
+                <Grid Margin="0 0 30 0"
                       Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-                    
+
                     <!-- Mask for rounded corners -->
                     <Border CornerRadius="8"
                             Name="Mask"
@@ -76,41 +76,16 @@
                                Stretch="UniformToFill" 
                                />
                     </Grid>
-
                 </Grid>
 
                 <!-- Profile details -->
-                <Grid Grid.Column="1"
-                      local:PanelChildMarginProperty.Value="15 5"
-                      >
+                <StackPanel Grid.Column="1">
+                    <local:TextEntryControl />
+                    <local:TextEntryControl />
+                    <local:TextEntryControl />
+                    <local:TextEntryControl />
+                </StackPanel>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <!-- Labels -->
-                    <TextBlock Text="Name" FontFamily="{StaticResource MontserratRegular}" />
-                    <TextBlock Text="Username" Grid.Row="1" FontFamily="{StaticResource MontserratRegular}" />
-                    <TextBlock Text="Password" Grid.Row="2" FontFamily="{StaticResource MontserratRegular}" />
-                    <TextBlock Text="Email" Grid.Row="3" FontFamily="{StaticResource MontserratRegular}" />
-                    
-                    <!-- Content -->
-                    <TextBlock Text="Suvan" Grid.Column="1" Grid.Row="0" />
-                    <TextBlock Text="suvanl" Grid.Column="1" Grid.Row="1" />
-                    <TextBlock Text="********" Grid.Column="1" Grid.Row="2" />
-                    <TextBlock Text="suvan@example.com" Grid.Column="1" Grid.Row="3" />
-
-                </Grid>
             </Grid>
 
         </Grid>

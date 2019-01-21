@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Memo
 {
@@ -31,9 +34,10 @@ namespace Memo
             if (!(sender is FrameworkElement element))
                 return;
 
-            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mAlreadyLoaded.ContainsKey(sender))
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && mAlreadyLoaded.ContainsKey(sender))
                 return;
 
+            // On first load...
             if (!mAlreadyLoaded.ContainsKey(sender))
             {
                 // Flags that the application is in the (unfinished) first load stage
@@ -58,7 +62,7 @@ namespace Memo
                     // Runs desired animation
                     DoAnimation(element, mFirstLoadValue.ContainsKey(sender) ? mFirstLoadValue[sender] : (bool)value, true);
 
-                    // No longer in FirstLoad stage
+                    // Flag that the application is longer in the FirstLoad stage
                     mAlreadyLoaded[sender] = true;
                 };
 
@@ -67,16 +71,20 @@ namespace Memo
             }
             else if (mAlreadyLoaded[sender] == false)
             {
-                // Updates the property
                 mFirstLoadValue[sender] = (bool)value;
             }
             else
             {
-                // Does the desired animation
+                // Runs the desired animation
                 DoAnimation(element, (bool)value, false);
             }
         }
 
+        /// <summary>
+        /// The animation method that is fired when the value changes
+        /// </summary>
+        /// <param name="element">The element</param>
+        /// <param name="value">The new value</param>
         protected virtual void DoAnimation(FrameworkElement element, bool value, bool firstLoad) { }
     }
 
@@ -111,6 +119,7 @@ namespace Memo
                 await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, firstLoad ? 0 : 0.3f, keepMargin: false);
         }
     }
+
 
     /// <summary>
     /// Animates a FrameworkElement, sliding it up from the bottom on show; sliding out to the bottom on hide

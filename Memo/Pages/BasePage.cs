@@ -1,10 +1,10 @@
-﻿using Memo.Core;
-using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Controls;
+using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using System;
+using Memo.Core;
+using System.ComponentModel;
 
 namespace Memo
 {
@@ -27,6 +27,9 @@ namespace Memo
 
         #region Constructor
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public BasePage()
         {
             // Prevents animations from taking place during design time
@@ -43,7 +46,7 @@ namespace Memo
 
         #endregion
 
-        #region Animation Load/Unload
+        #region Animation Load / Unload
 
         /// <summary>
         /// Once the page has loaded, perform any required animation(s)
@@ -66,6 +69,7 @@ namespace Memo
             switch (PageLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInFromRight:
+
                     await this.SlideAndFadeInAsync(AnimationSlideInDirection.Right, false, SlideSeconds, size: (int)Application.Current.MainWindow.Width);
                     break;
             }
@@ -79,6 +83,7 @@ namespace Memo
             switch (PageUnloadAnimation)
             {
                 case PageAnimation.SlideAndFadeOutToLeft:
+
                     await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, SlideSeconds);
                     break;
             }
@@ -91,7 +96,7 @@ namespace Memo
     /// A base page with added ViewModel support
     /// </summary>
     public class BasePage<VM> : BasePage
-        where VM : BaseViewModel, new ()
+        where VM : BaseViewModel, new()
     {
         #region Private Members
 
@@ -101,6 +106,9 @@ namespace Memo
 
         #region Public Properties
 
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
         public VM ViewModel
         {
             get => mViewModel;
@@ -110,7 +118,6 @@ namespace Memo
                     return;
 
                 mViewModel = value;
-
                 DataContext = mViewModel;
             }
         }
@@ -119,6 +126,9 @@ namespace Memo
 
         #region Constructor
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public BasePage() : base()
         {
             ViewModel = new VM();

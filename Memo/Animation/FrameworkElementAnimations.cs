@@ -46,7 +46,6 @@ namespace Memo
             }
 
             sb.AddFadeIn(seconds);
-
             sb.Begin(element);
 
             if (seconds != 0 || firstLoad)
@@ -88,7 +87,6 @@ namespace Memo
             }
 
             sb.AddFadeOut(seconds);
-
             sb.Begin(element);
 
             if (seconds != 0)
@@ -101,7 +99,7 @@ namespace Memo
 
         #endregion
 
-        #region Fade In/Out
+        #region Fade In / Out
 
         /// <summary>
         /// Fades an element in
@@ -115,7 +113,6 @@ namespace Memo
             var sb = new Storyboard();
 
             sb.AddFadeIn(seconds);
-
             sb.Begin(element);
 
             if (seconds != 0 || firstLoad)
@@ -125,7 +122,7 @@ namespace Memo
         }
 
         /// <summary>
-        /// Slides an element out to the right
+        /// Fades an element out
         /// </summary>
         /// <param name="element">The element to animate</param>
         /// <param name="seconds">Duration of the animation</param>
@@ -136,7 +133,6 @@ namespace Memo
             var sb = new Storyboard();
 
             sb.AddFadeOut(seconds);
-
             sb.Begin(element);
 
             if (seconds != 0)

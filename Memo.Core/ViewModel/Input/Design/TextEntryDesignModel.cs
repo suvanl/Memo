@@ -1,16 +1,16 @@
 ﻿namespace Memo.Core
 {
     /// <summary>
-    /// Design time data for a see <see cref="MessageBoxDialogViewModel"/>
+    /// The design-time data for a <see cref="TextEntryViewModel"/>
     /// </summary>
-    public class MessageBoxDialogDesignModel : MessageBoxDialogViewModel
+    public class TextEntryDesignModel : TextEntryViewModel
     {
         #region Singleton
 
         /// <summary>
         /// A single instance of the design model
         /// </summary>
-        public static MessageBoxDialogDesignModel Instance => new MessageBoxDialogDesignModel();
+        public static TextEntryDesignModel Instance => new TextEntryDesignModel();
 
         #endregion
 
@@ -19,10 +19,11 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        public MessageBoxDialogDesignModel()
+        public TextEntryDesignModel()
         {
-            Message = "Design-time message";
-            OkText = "OK";
+            Label = "Name";
+            OriginalText = "Suvan";
+            EditedText = "Editing...";
         }
 
         #endregion
