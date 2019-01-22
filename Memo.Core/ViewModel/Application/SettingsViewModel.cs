@@ -35,6 +35,12 @@ namespace Memo.Core
         {
             OpenCommand = new RelayCommand(Open);
             CloseCommand = new RelayCommand(Close);
+
+            // TODO: replace with real info fetched from database in future
+            Name = new TextEntryViewModel { Label = "Name", OriginalText = "Suvan" };
+            Username = new TextEntryViewModel { Label = "Username", OriginalText = "suvanl" };
+            Password = new TextEntryViewModel { Label = "Password", OriginalText = "************" };
+            Email = new TextEntryViewModel { Label = "Email", OriginalText = "suvan@example.com" };
         }
 
         #endregion
